@@ -1,0 +1,14 @@
+{
+  "schemaVersion": 1,
+  "channel": "crew",
+  "publishedAt": null,
+  "version": null,
+  "status": "preparing",
+  "notes": "Der heutige Release mit Legato wird vorbereitet. Downloads werden nach den Tests freigeschaltet.",
+  "releaseNotesUrl": null,
+  "sourceUrl": null,
+  "platforms": {
+    "windows": { "available": false, "downloads": {} },
+    "macos": { "available": false, "downloads": {} }
+  }
+}
