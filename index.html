@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Die ZINAVIS Crew: Player und Creator testen, eigene Libraries erstellen und gemeinsam Musiksoftware verbessern.">
   <meta name="theme-color" content="#101112">
+  <link rel="icon" type="image/png" href="assets/PlayerIcon.png">
   <title>ZINAVIS · Crew</title>
   <link rel="stylesheet" href="styles.css">
   <script src="app.js" defer></script>
@@ -12,22 +13,26 @@
 <body>
   <div class="page">
     <header>
-      <a class="wordmark" href="#" aria-label="ZINAVIS Startseite">ZINAVIS</a>
+      <a class="brand" href="#" aria-label="ZINAVIS Startseite"><img src="assets/ZinavisLogo.png" alt="ZINAVIS Media Production" width="2172" height="724"></a>
       <nav aria-label="Navigation"><a href="#downloads">Downloads</a><a href="#libraries">Libraries</a><a href="#mitmachen">Mitmachen</a></nav>
     </header>
+    <div id="asset-loading" class="asset-loading" hidden><progress id="asset-progress" aria-label="Website-Bilder laden"></progress><p id="asset-status" class="small" role="status"></p></div>
     <main>
       <section class="welcome" aria-labelledby="welcome-title">
+        <div class="welcome-copy">
         <h1 id="welcome-title">Hallo, liebe ZINAVIS Crew.</h1>
         <p>Hier bekommt ihr den ZINAVIS Player und den Creator. Mit dem Creator könnt ihr selbst Libraries erstellen; mit dem Player spielt ihr sie als eigenständige App oder als VST3 in eurer DAW.</p>
         <p>Die Software ist noch in Entwicklung und wird laufend von mir aktualisiert. Lasst uns gemeinsam die Ecken glätten. Viel Spaß beim Testen ;)</p>
         <p class="signature">Liebe Grüße<br>Timo</p>
+        </div>
+        <img class="brand-art" src="assets/ZinavisBackground.png" alt="Rote und schwarze Kristallstruktur aus dem ZINAVIS-Artwork" width="1672" height="941" decoding="async">
       </section>
       <section id="downloads" class="downloads" aria-labelledby="setup-title">
         <div class="section-top"><h2 id="setup-title">Dein Setup.</h2><div class="platforms" role="group" aria-label="Betriebssystem"><button type="button" data-platform="windows" aria-pressed="true">Windows</button><button type="button" data-platform="macos" aria-pressed="false">macOS</button></div></div>
         <p id="release-status" role="status">Der heutige Release mit Legato wird vorbereitet. Downloads werden nach den Tests freigeschaltet.</p>
         <div class="products">
-          <article><h3>Player</h3><p class="subtitle">Standalone + VST3</p><p>Deine Libraries spielen. In deiner DAW oder direkt auf deinem Rechner.</p><a class="download disabled" data-product="player" aria-disabled="true">Release wird vorbereitet</a></article>
-          <article><h3>Creator</h3><p class="subtitle">Libraries erstellen</p><p>Samples aufnehmen, bearbeiten und als eigene spielbare Library exportieren.</p><a class="download disabled" data-product="creator" aria-disabled="true">Release wird vorbereitet</a></article>
+          <article><div class="product-title"><img src="assets/PlayerIcon.png" alt="" width="48" height="48"><h3>Player</h3></div><p class="subtitle">Standalone + VST3</p><p>Deine Libraries spielen. In deiner DAW oder direkt auf deinem Rechner.</p><a class="download disabled" data-product="player" aria-disabled="true">Release wird vorbereitet</a></article>
+          <article><div class="product-title"><img src="assets/CreatorIcon.png" alt="" width="48" height="48"><h3>Creator</h3></div><p class="subtitle">Libraries erstellen</p><p>Samples aufnehmen, bearbeiten und als eigene spielbare Library exportieren.</p><a class="download disabled" data-product="creator" aria-disabled="true">Release wird vorbereitet</a></article>
           <article><h3>Kit</h3><p class="subtitle">Player + Creator</p><p>Beide Programme in einem Setup. Zum Spielen, Erstellen und Teilen.</p><a class="download disabled" data-product="kit" aria-disabled="true">Release wird vorbereitet</a></article>
         </div>
         <div class="update-area"><button type="button" id="check-updates" class="text-action">Updates prüfen <span aria-hidden="true">→</span></button><div id="loading" hidden><progress id="load-progress" aria-label="Release-Informationen laden"></progress></div><p id="update-status" role="status" aria-live="polite"></p><a id="release-notes" class="update-link" hidden>Was ist neu?</a></div>
@@ -39,7 +44,7 @@
         <section id="mitmachen" aria-labelledby="feedback-title"><h3 id="feedback-title">Gemeinsam besser</h3><p>Ein Bug oder eine Idee? Beschreib kurz, was du gemacht hast und was passieren sollte.</p><button class="text-action" id="open-feedback" type="button">Fehler oder Wunsch melden <span aria-hidden="true">→</span></button><p class="small">Meldungen gehen über GitHub an das Projekt. Ein GitHub-Konto ist nötig; Meldungen sind öffentlich. Keine privaten Daten oder Sample-Dateien anhängen.</p><h4>Eigene Library einreichen</h4><p class="small">Bis „Send to developer“ verfügbar ist: im Creator über „Export Project“ ein ZIP erstellen und den Austausch mit Timo abstimmen. Noch kein automatischer Upload.</p></section>
       </div>
     </main>
-    <footer><span class="wordmark">ZINAVIS</span><span>Timo</span><a id="source-link" hidden>Quellcode & Lizenz</a><span>Software in Entwicklung.</span></footer>
+    <footer><img class="footer-logo" src="assets/ZinavisLogo.png" alt="ZINAVIS Media Production" width="2172" height="724"><span>Timo</span><a id="source-link" hidden>Quellcode & Lizenz</a><span>Software in Entwicklung.</span></footer>
   </div>
   <dialog id="feedback-dialog" aria-labelledby="feedback-heading"><form id="feedback-form"><div class="dialog-top"><h2 id="feedback-heading">Dein Feedback.</h2><button type="button" id="close-feedback" aria-label="Schließen">×</button></div><label for="feedback-kind">Was möchtest du melden?</label><select id="feedback-kind"><option value="bug">Fehler</option><option value="feature">Feature-Wunsch</option></select><label for="feedback-title-input">Kurzer Titel</label><input id="feedback-title-input" maxlength="120" required><label for="feedback-app">Programm</label><select id="feedback-app"><option>Player</option><option>Creator</option><option>Website</option></select><label for="feedback-body">Beschreibung</label><textarea id="feedback-body" rows="5" maxlength="5000" required placeholder="Was hast du gemacht? Was sollte passieren? Was ist stattdessen passiert?"></textarea><p class="small">Im nächsten Schritt öffnet sich GitHub. Dort prüfst und sendest du deine öffentliche Meldung. Hier wird nichts gespeichert oder gesendet.</p><button class="primary" type="submit">Auf GitHub prüfen und senden →</button></form></dialog>
 </body>

@@ -35,6 +35,7 @@ Große Installer werden durch den Browser heruntergeladen und nutzen dessen Down
 
 Im Software-Repository: `node Tools/distribution/preview.mjs Website/crew 4317`.
 Die öffentliche Seite besteht ausschließlich aus `index.html`, `styles.css`, `app.js`, `releases.json`
-und `.nojekyll`; dieses README darf ebenfalls veröffentlicht werden.
+und `.nojekyll` sowie den unveränderten ZINAVIS-Grafiken in `assets/`; dieses README darf ebenfalls
+veröffentlicht werden. Bild-Ladevorgänge haben einen Balken nach tatsächlich abgeschlossenen Assets.
 
 Marke und Texte bleiben ZINAVIS zugeordnet. Keine zusätzliche Software-Lizenz durch die Website vergeben.

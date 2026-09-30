@@ -78,4 +78,24 @@ document.querySelector('#feedback-form').addEventListener('submit',event => {
   const query = new URLSearchParams({title:`[${app}] ${title}`,body:`Art: ${kind === 'bug' ? 'Fehler' : 'Feature-Wunsch'}\nProgramm: ${app}\nVersion: ${manifest?.version || 'bitte ergänzen'}\nBetriebssystem: ${platform === 'windows' ? 'Windows' : 'macOS'}\n\n${description}\n\nBitte ergänzen: genaue Programmversion, Betriebssystemversion und (bei VST3) DAW.`});
   window.location.assign(`https://github.com/TheBegger/zinavis-crew/issues/new?${query}`);
 });
+// Count completed image loads; this is asset progress, not an invented byte percentage.
+const images = [...document.querySelectorAll('img')];
+const assetLoading = document.querySelector('#asset-loading');
+const assetProgress = document.querySelector('#asset-progress');
+const assetStatus = document.querySelector('#asset-status');
+let assetsFinished = 0;
+let assetsFailed = 0;
+assetProgress.max = images.length;
+assetProgress.value = 0;
+assetLoading.hidden = images.length === 0;
+function assetFinished(image) {
+  if (!image.naturalWidth) assetsFailed++;
+  assetProgress.value = ++assetsFinished;
+  assetStatus.textContent = `Bilder geladen: ${assetsFinished} von ${images.length}${assetsFailed ? ` · ${assetsFailed} nicht erreichbar` : ''}`;
+  if (assetsFinished === images.length && !assetsFailed) assetLoading.hidden = true;
+}
+images.forEach(image => {
+  if (image.complete) assetFinished(image);
+  else { image.addEventListener('load',() => assetFinished(image),{once:true}); image.addEventListener('error',() => assetFinished(image),{once:true}); }
+});
 checkUpdates();
